@@ -3,6 +3,18 @@
 # Learn more about .gitignore:
 #     https://www.atlassian.com/git/tutorials/saving-changes/gitignore
 
+
+# Enviroment folders
+.pytest_cache/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+env_*/ # In my case, env_docx
+env_docx
+
+
 # Node artifact files
 node_modules/
 dist/
