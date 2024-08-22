@@ -115,6 +115,9 @@ python example.py formula_recognition  <document_file_path> <output_file_path>  
 python example.py document_structurization <document_file_path> <output_file_path>  # task: document structurization  (dump supports both image and JSON file)
 python example.py whole_pdf_conversion <document_file_path> <output_file_path>  # task: whole PDF conversion, i.e., converting all pages of a PDF file into an organized JSON structure (dump supports only JSON file)
 ``` 
+```sh
+python example.py whole_pdf_conversion /papers/Hensley_Wilkins.pdf output/test2.json
+``
 
 ## Citation
 
