@@ -20,6 +20,9 @@ from pipelines.table_parsing import TableParsing
 from pipelines.document_structurization import DocumentStructurization
 from utilities.visualization import *
 
+MODEL_PATH="/home/models/"
+
+
 def general_text_reading_example(image):
 
     # configure
@@ -96,10 +99,10 @@ def formula_recognition_example(image):
 
     formula_recognition_configs = dict()
     formula_recognition_configs['from_modelscope_flag'] = False
-    formula_recognition_configs['image_resizer_path'] = '/home/LaTeX-OCR_image_resizer.onnx'
-    formula_recognition_configs['encoder_path'] = '/home/LaTeX-OCR_encoder.onnx'
-    formula_recognition_configs['decoder_path'] = '/home/LaTeX-OCR_decoder.onnx'
-    formula_recognition_configs['tokenizer_json'] = '/home/LaTeX-OCR_tokenizer.json'
+    formula_recognition_configs['image_resizer_path'] = MODEL_PATH+'LaTeX-OCR_image_resizer.onnx'
+    formula_recognition_configs['encoder_path'] = MODEL_PATH+'LaTeX-OCR_encoder.onnx'
+    formula_recognition_configs['decoder_path'] = MODEL_PATH+'LaTeX-OCR_decoder.onnx'
+    formula_recognition_configs['tokenizer_json'] = MODEL_PATH+'LaTeX-OCR_tokenizer.json'
     configs['formula_recognition_configs'] = formula_recognition_configs
 
     # initialize
@@ -125,7 +128,7 @@ def document_structurization_example(image):
     
     layout_analysis_configs = dict()
     layout_analysis_configs['from_modelscope_flag'] = False
-    layout_analysis_configs['model_path'] = '/home/DocXLayout_231012.pth'  # note that: currently the layout analysis model is NOT from modelscope
+    layout_analysis_configs['model_path'] = MODEL_PATH+'DocXLayout_231012.pth'  # note that: currently the layout analysis model is NOT from modelscope
     configs['layout_analysis_configs'] = layout_analysis_configs
     
     text_detection_configs = dict()
@@ -140,10 +143,10 @@ def document_structurization_example(image):
 
     formula_recognition_configs = dict()
     formula_recognition_configs['from_modelscope_flag'] = False
-    formula_recognition_configs['image_resizer_path'] = '/home/LaTeX-OCR_image_resizer.onnx'
-    formula_recognition_configs['encoder_path'] = '/home/LaTeX-OCR_encoder.onnx'
-    formula_recognition_configs['decoder_path'] = '/home/LaTeX-OCR_decoder.onnx'
-    formula_recognition_configs['tokenizer_json'] = '/home/LaTeX-OCR_tokenizer.json'
+    formula_recognition_configs['image_resizer_path'] = MODEL_PATH+'LaTeX-OCR_image_resizer.onnx'
+    formula_recognition_configs['encoder_path'] = MODEL_PATH+'LaTeX-OCR_encoder.onnx'
+    formula_recognition_configs['decoder_path'] = MODEL_PATH+'LaTeX-OCR_decoder.onnx'
+    formula_recognition_configs['tokenizer_json'] = MODEL_PATH+'LaTeX-OCR_tokenizer.json'
     configs['formula_recognition_configs'] = formula_recognition_configs
 
     # initialize
@@ -185,10 +188,10 @@ def whole_pdf_conversion_example(image_list):
 
     formula_recognition_configs = dict()
     formula_recognition_configs['from_modelscope_flag'] = False
-    formula_recognition_configs['image_resizer_path'] = '/home/LaTeX-OCR_image_resizer.onnx'
-    formula_recognition_configs['encoder_path'] = '/home/LaTeX-OCR_encoder.onnx'
-    formula_recognition_configs['decoder_path'] = '/home/LaTeX-OCR_decoder.onnx'
-    formula_recognition_configs['tokenizer_json'] = '/home/LaTeX-OCR_tokenizer.json'
+    formula_recognition_configs['image_resizer_path'] = MODEL_PATH+'LaTeX-OCR_image_resizer.onnx'
+    formula_recognition_configs['encoder_path'] = MODEL_PATH+'LaTeX-OCR_encoder.onnx'
+    formula_recognition_configs['decoder_path'] = MODEL_PATH+'LaTeX-OCR_decoder.onnx'
+    formula_recognition_configs['tokenizer_json'] = MODEL_PATH+'LaTeX-OCR_tokenizer.json'
     configs['formula_recognition_configs'] = formula_recognition_configs
 
     # initialize
@@ -286,4 +289,3 @@ def main():
 if __name__ == "__main__":
     # execute only if run as a script
     main()
-
