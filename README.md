@@ -1,35 +1,14 @@
 # DocXChain: A Powerful Open-Source Toolchain for Document Parsing and Beyond
 
-## 0.1 Notas Personales sobre este programa
-Dado que lo que se genera es un image_to_text.json basado en una imagen, lo que se obtiene de contenido son renglones, no párrafos como podría suponerse de las imágenes que muestra la versión original de este README.md
+## Updated notes on installation
 
-Lo anterior nos lleva futuras tareas posteriores dada la exitosa instalación del programa:
-
-- Test on not-image files. ¿Qué hace con un pdf?
-- Generación de un "Document" (from langchain_core.documents import Document) ... dado el image_to_text.json
-- Reconstruir chunks dados los elementos del json haciendo uso de los metadatos generados
-- Dar sentido a los metadatos generados para poder contruir/descartar Chunks y Documentos coherentes y relevantes.
-
-
-## 0.2 Notas Personales para instalación
-
-Para poder correr correctamente el programa siga los siguientes pasos:
-
-- Paso_1: Ejecutar todas las intrucciones originales de instalación mencionadas en "Instalation"
-- Paso_2: Adicionalmente, instalar todas programas faltanes:
-```sh
-pip install -r requirements_extra.txt
-```
-- Paso_3: (Opcional)En algún momento me encontré con que falta un configuration-checkpoint.json que nunca se usa, así que simplemente lo cree vacío en vez de afectar el código. Si no tienes este problema, ignora este paso.
+- Pinned version of requirements are included in `requirements.txt`. The pinned version were compiled using `pip-tools` on `requirements.in`.
+- Install modelscope with cv: `pip install modelscope[cv]`. This instruction also install torch.
+- Install tensorflow<=2.12: `pip install tensorflow<=2.12`.
+- Create missing file:
 ```sh
 touch /home/<USERNAME>/.cache/modelscope/hub/._____temp/damo/cv_resnet18_ocr-detection-line-level_damo/.ipynb_checkpoints/configuration-checkpoint.json
 ```
-- Paso_4: Son 4 funciones las que se incluyen en el repo, pero es la cuarta *whole_pdf_conversion* la que hace lo que necesitamos.
-Convertir todo el archivo.pdf y clasificarlo (Header, Footer, Plain text, etc.)
-```sh
-python example.py whole_pdf_conversion ./papers/Hensley_Wilkins.pdf ./output/image_to_text.json
-```
-
 
 ## Introduction
 
