@@ -20,7 +20,7 @@ from pipelines.table_parsing import TableParsing
 from pipelines.document_structurization import DocumentStructurization
 from utilities.visualization import *
 
-MODEL_PATH="/home/models/"
+MODEL_PATH="/home/user/models/"
 
 
 def general_text_reading_example(image):
@@ -173,7 +173,7 @@ def whole_pdf_conversion_example(image_list):
     
     layout_analysis_configs = dict()
     layout_analysis_configs['from_modelscope_flag'] = False
-    layout_analysis_configs['model_path'] = '/home/DocXLayout_231012.pth'  # note that: currently the layout analysis model is NOT from modelscope
+    layout_analysis_configs['model_path'] = MODEL_PATH+'DocXLayout_231012.pth'  # note that: currently the layout analysis model is NOT from modelscope
     configs['layout_analysis_configs'] = layout_analysis_configs
     
     text_detection_configs = dict()

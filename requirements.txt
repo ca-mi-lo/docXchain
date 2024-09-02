@@ -4,26 +4,8 @@
 #
 #    pip-compile --output-file=requirements.txt requirements.in
 #
-addict==2.4.0
-    # via -r requirements.in
-aiohappyeyeballs==2.4.0
-    # via aiohttp
-aiohttp==3.10.5
-    # via
-    #   datasets
-    #   fsspec
-aiosignal==1.3.1
-    # via aiohttp
-aliyun-python-sdk-core==2.15.2
-    # via
-    #   aliyun-python-sdk-kms
-    #   oss2
-aliyun-python-sdk-kms==2.16.5
-    # via oss2
-async-timeout==4.0.3
-    # via aiohttp
-attrs==24.2.0
-    # via aiohttp
+asttokens==2.4.1
+    # via stack-data
 certifi==2024.8.30
     # via requests
 cffi==1.17.0
@@ -34,59 +16,42 @@ charset-normalizer==3.3.2
     #   requests
 coloredlogs==15.0.1
     # via onnxruntime
-crcmod==1.7
-    # via oss2
 cryptography==43.0.0
+    # via pdfminer-six
+decorator==5.1.1
     # via
-    #   aliyun-python-sdk-core
-    #   pdfminer-six
-datasets==2.21.0
-    # via -r requirements.in
-dill==0.3.8
-    # via
-    #   datasets
-    #   multiprocess
+    #   ipdb
+    #   ipython
+exceptiongroup==1.2.2
+    # via ipython
+executing==2.1.0
+    # via stack-data
 filelock==3.15.4
-    # via
-    #   datasets
-    #   huggingface-hub
+    # via huggingface-hub
 flatbuffers==24.3.25
     # via onnxruntime
-frozenlist==1.4.1
-    # via
-    #   aiohttp
-    #   aiosignal
-fsspec[http]==2024.6.1
-    # via
-    #   datasets
-    #   huggingface-hub
+fsspec==2024.6.1
+    # via huggingface-hub
 huggingface-hub==0.24.6
-    # via
-    #   datasets
-    #   tokenizers
+    # via tokenizers
 humanfriendly==10.0
     # via coloredlogs
 idna==3.8
-    # via
-    #   requests
-    #   yarl
-jmespath==0.10.0
-    # via aliyun-python-sdk-core
+    # via requests
+ipdb==0.13.13
+    # via -r requirements.in
+ipython==8.27.0
+    # via ipdb
+jedi==0.19.1
+    # via ipython
+matplotlib-inline==0.1.7
+    # via ipython
 mpmath==1.3.0
     # via sympy
-multidict==6.0.5
-    # via
-    #   aiohttp
-    #   yarl
-multiprocess==0.70.16
-    # via datasets
 numpy==1.26.4
     # via
-    #   datasets
     #   onnxruntime
     #   opencv-python
-    #   pandas
-    #   pyarrow
     #   rapid-latex-ocr
 onnxruntime==1.19.0
     # via rapid-latex-ocr
@@ -94,72 +59,67 @@ opencv-python==4.10.0.84
     # via
     #   -r requirements.in
     #   rapid-latex-ocr
-oss2==2.19.0
-    # via -r requirements.in
 packaging==24.1
     # via
-    #   datasets
     #   huggingface-hub
     #   onnxruntime
-pandas==2.2.2
-    # via
-    #   -r requirements.in
-    #   datasets
+parso==0.8.4
+    # via jedi
 pdfminer-six==20231228
     # via pdfplumber
 pdfplumber==0.11.4
     # via -r requirements.in
+pexpect==4.9.0
+    # via ipython
 pillow==10.4.0
     # via
     #   pdfplumber
     #   rapid-latex-ocr
+prompt-toolkit==3.0.47
+    # via ipython
 protobuf==5.28.0
     # via onnxruntime
-pyarrow==17.0.0
-    # via datasets
+ptyprocess==0.7.0
+    # via pexpect
+pure-eval==0.2.3
+    # via stack-data
 pycparser==2.22
     # via cffi
-pycryptodome==3.20.0
-    # via oss2
+pygments==2.18.0
+    # via ipython
 pypdfium2==4.30.0
     # via pdfplumber
-python-dateutil==2.9.0.post0
-    # via pandas
-pytz==2024.1
-    # via
-    #   -r requirements.in
-    #   pandas
 pyyaml==6.0.2
     # via
-    #   datasets
     #   huggingface-hub
     #   rapid-latex-ocr
 rapid-latex-ocr==0.0.7
     # via -r requirements.in
 requests==2.32.3
-    # via
-    #   datasets
-    #   huggingface-hub
-    #   oss2
+    # via huggingface-hub
 six==1.16.0
-    # via
-    #   oss2
-    #   python-dateutil
+    # via asttokens
+stack-data==0.6.3
+    # via ipython
 sympy==1.13.2
     # via onnxruntime
-tokenizers==0.20.0
-    # via rapid-latex-ocr
-tqdm==4.66.5
+tokenizers==0.19.1
     # via
-    #   datasets
-    #   huggingface-hub
-typing-extensions==4.12.2
+    #   -r requirements.in
+    #   rapid-latex-ocr
+tomli==2.0.1
+    # via ipdb
+tqdm==4.66.5
     # via huggingface-hub
-tzdata==2024.1
-    # via pandas
+traitlets==5.14.3
+    # via
+    #   ipython
+    #   matplotlib-inline
+typing-extensions==4.12.2
+    # via
+    #   huggingface-hub
+    #   ipython
 urllib3==2.2.2
     # via requests
-xxhash==3.5.0
-    # via datasets
-yarl==1.9.4
-    # via aiohttp
+wcwidth==0.2.13
+    # via prompt-toolkit

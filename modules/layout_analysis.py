@@ -7,7 +7,7 @@ import numpy as np
 import json
 
 BASE_DIR = os.path.dirname(__file__)
-sys.path.append(BASE_DIR + '/../../../DocumentUnderstanding/DocXLayout')
+sys.path.append(BASE_DIR + '/../DocXLayout')
 
 #sys.path.append(BASE_DIR + '/../../../DocumentUnderstanding/DocXLayout')
 from main import DocXLayoutInfo, DocXLayoutPredictor
@@ -37,7 +37,7 @@ class LayoutAnalysis(object):
             }
 
             # load map information
-            map_info = json.load(open(BASE_DIR + '/../../../DocumentUnderstanding/DocXLayout/map_info.json'))
+            map_info = json.load(open(BASE_DIR + '/../DocXLayout/map_info.json'))
             category_map = {}
             for cate, idx in map_info["huntie"]["primary_map"].items():
                 category_map[idx] = cate

@@ -1,8 +1,6 @@
 opencv-python
 pdfplumber
 rapid_latex_ocr
-pytz
-pandas
-addict
-datasets
-oss2
+# extras
+ipdb
+tokenizers<0.20
