@@ -20,7 +20,7 @@ from pipelines.table_parsing import TableParsing
 from pipelines.document_structurization import DocumentStructurization
 from utilities.visualization import *
 
-MODEL_PATH="/home/user/models/"
+MODEL_PATH="./models/"
 
 
 def general_text_reading_example(image):

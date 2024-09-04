@@ -2,12 +2,25 @@
 
 ## Updated notes on installation
 
-- Pinned version of requirements are included in `requirements.txt`. The pinned version were compiled using `pip-tools` on `requirements.in`.
-- Install modelscope with cv: `pip install modelscope[cv]`. This instruction also install torch.
+- Pinned version of requirements are included in `requirements.txt`. The pinned 
+  version were compiled using `pip-tools` on `requirements.in`.
+- Install modelscope with cv: `pip install modelscope[cv] -f https://modelscope.oss-cn-beijing.aliyuncs.com/releases/repo.html`. 
+  This instruction also install torch, if there is an error about torch install 
+  before 
+  ```
+  pip install torch -f https://modelscope.oss-cn-beijing.aliyuncs.com/releases/repo.html
+  ```
 - Install tensorflow<=2.12: `pip install tensorflow<=2.12`.
 - Create missing file:
 ```sh
 touch /home/<USERNAME>/.cache/modelscope/hub/._____temp/damo/cv_resnet18_ocr-detection-line-level_damo/.ipynb_checkpoints/configuration-checkpoint.json
+```
+
+## Docker image
+
+A docker image can be created using `docker/Dockerfile`:
+```
+docker build -t docx:1 -f docker/Dockerfile .
 ```
 
 ## Introduction
