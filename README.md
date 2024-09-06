@@ -1,40 +1,147 @@
-# Advanced Literate Machinery
+# DocXChain: A Powerful Open-Source Toolchain for Document Parsing and Beyond
+
+## Updated notes on installation
+
+- Pinned version of requirements are included in `requirements.txt`. The pinned 
+  version were compiled using `pip-tools` on `requirements.in`.
+- Install modelscope with cv: `pip install modelscope[cv] -f https://modelscope.oss-cn-beijing.aliyuncs.com/releases/repo.html`. 
+  This instruction also install torch, if there is an error about torch install 
+  before 
+  ```
+  pip install torch -f https://modelscope.oss-cn-beijing.aliyuncs.com/releases/repo.html
+  ```
+- Install tensorflow<=2.12: `pip install tensorflow<=2.12`.
+- Create missing file:
+```sh
+touch /home/<USERNAME>/.cache/modelscope/hub/._____temp/damo/cv_resnet18_ocr-detection-line-level_damo/.ipynb_checkpoints/configuration-checkpoint.json
+```
+
+## Docker image
+
+A docker image can be created using `docker/Dockerfile`:
+```
+docker build -t docx:1 -f docker/Dockerfile .
+```
 
 ## Introduction
 
-The ultimate goal of our research is to build a system that has high-level intelligence, i.e., possessing the abilities to ***read, think and create***, so advanced that it could even surpass human intelligence one day in the future. We name this kind of systems **Advanced Literate Machinery (ALM)**.
+<font color=#FFA500 size=3> ***"Make Every Unstructured Document Literally Accessible to Machines"*** </font>
 
-To start with, we currently focus on teaching machines to ***read*** from images and documents. In years to come, we will explore the possibilities of endowing machines with the intellectual capabilities of ***thinking and creating***, catching up with and surpassing [GPT-4](https://openai.com/research/gpt-4) and [GPT-4V](https://openai.com/research/gpt-4v-system-card).
+Documents are ubiquitous, since they are excellent carriers for recording and spreading information across space and time. Documents have been playing a critically important role in the daily work, study and life of people all over the world. Every day, billions of documents in different forms are created, viewed, processed, transmited and stored around the world, either physically or digitally. However, not all documents in the digital world can be directly accessed by machines (including computers and other automatic equipments), as only a portion of the documents can be successfully parsed with low-level procedures. For instance, the [Adobe Extract APIs](https://developer.adobe.com/document-services/docs/overview/pdf-extract-api/) are able to directly convert the metadata of born-digital PDF files into HTML-like trees, but would completely fail when handling PDFs generated from photographs produced by scanners or images captured by cameras. Therefore, if one would like to make documents that are not born-digital conveniently and instantly accessible to machines, a powerful toolset for extracting the structures and contents from such unstructured documents is of the essence.
 
-This project is maintained by the **读光 OCR Team** (读光-Du Guang means “*Reading The Light*”) in the [Tongyi Lab, Alibaba Group](https://tongyi.aliyun.com/).
+DocXChain is a powerful open-source toolchain for document parsing, which can convert the rich information in ***unstructured documents***, such as text, tables and charts, into ***structured representations*** that are readable and manipulable by machines. Currently, basic capabilities, including text detection, text recognition, table structure recognition, mathematical formula recognition and layout analysis, are provided. In addition, upon these basic capabilities, we also build typical pipelines, i.e., text reading, table parsing, document structurization and whole PDF conversion, to drive more complicated applications related to documents in real-world scenarios.
 
-![Logo](./resources/DuGuang.png)
+DocXChain is designed and developed with the original aspiration of ***promoting the level of digitization and structurization for documents***. In the future, we will go beyond pure document parsing capabilities, to explore more possibilities, e.g., combining DocXChain with large language models (LLMs) to perform document information extraction (IE), question answering (QA) and retrieval-augmented generation (RAG).
 
-Visit our [读光-Du Guang Portal](https://duguang.aliyun.com/) and [DocMaster](https://www.modelscope.cn/studios/damo/DocMaster/summary) to experience online demos for OCR and Document Understanding.
+For more details, please refer to the [technical report](https://arxiv.org/abs/2310.12430) of DocXChain. 
 
-## Recent Updates
+**Notice 1:** In this project, we adopt the ***broad concept of documents***, meaning DocXChain can support various kinds of documents, including regular documents (such as books, academic papers and business forms), street view photos, presentations and even screenshots.
 
-**2024.4 Release**
-  - [**OmniParser**](./OCR/OmniParser/) (*OmniParser: A Unified Framework for Text Spotting, Key Information Extraction and Table Recognition,* CVPR 2024. [paper](https://arxiv.org/abs/2403.19128)): We propose a universal model for parsing visually-situated text across diverse scenarios, called OmniParser, which can simultaneously handle three typical visually-situated text parsing tasks: text spotting, key information extraction, and table recognition. In OmniParser, all tasks share the **unified encoder-decoder architecture**, the unified objective: **point-conditioned text generation**, and the unified input & output representation: **prompt & structured sequences**.
+**Notice 2:** You are welcome to experience our online PoC system [DocMaster](https://www.modelscope.cn/studios/damo/DocMaster/summary), which combines basic document parsing capabilities with LLMs to realize precise document information extraction and question answering.
 
-**2024.3 Release**
-  - [**GEM**](./DocumentUnderstanding/GEM/) (*GEM: Gestalt Enhanced Markup Language Model for Web Understanding via Render Tree,* EMNLP 2023. [paper](https://aclanthology.org/2023.emnlp-main.375.pdf)): Web pages serve as crucial carriers for humans to acquire and perceive information. Inspired by the Gestalt psychological theory, we propose an innovative Gestalt Enhanced Markup Language Model (GEM for short) for **hosting heterogeneous visual information from render trees of web pages**, leading to excellent performances on tasks such as web question answering and web information extraction.
+**Notice 3:** We also provide commercial products (online APIs) for document parsing on Alibaba Could. Please visit the [homepage of DocMind](https://docmind.console.aliyun.com/doc-overview), if you are interested.
 
-**2023.9 Release**
-  - [**DocXChain**](./Applications/DocXChain/) (*DocXChain: A Powerful Open-Source Toolchain for Document Parsing and Beyond,* arXiv 2023. [report](https://arxiv.org/abs/2310.12430)): To **promote the level of digitization and structurization for documents**, we develop and release an open-source toolchain, called DocXChain, for precise and detailed document parsing. Currently, basic capabilities, including text detection, text recognition, table structure recognition, and layout analysis, are provided. Also, typical pipelines, i.e., general text reading, table parsing, and document structurization, are built to support more complicated applications related to documents. Most of the algorithmic models are from [ModelScope](https://github.com/modelscope/modelscope). Formula recognition (using models from [RapidLatexOCR](https://github.com/RapidAI/RapidLatexOCR)) and whole PDF conversion (PDF to JSON format) are now supported.
-  - [**LISTER**](./OCR/LISTER/) (*LISTER: Neighbor Decoding for Length-Insensitive Scene Text Recognition,* ICCV 2023. [paper](https://arxiv.org/abs/2308.12774v1)): We propose a method called Length-Insensitive Scene TExt Recognizer (LISTER), which remedies the limitation regarding the **robustness to various text lengths**. Specifically, a Neighbor Decoder is proposed to obtain accurate character attention maps with the assistance of a novel neighbor matrix regardless of the text lengths. Besides, a Feature Enhancement Module is devised to model the long-range dependency with low computation cost, which is able to perform iterations with the neighbor decoder to enhance the feature map progressively..
-  - [**VGT**](./DocumentUnderstanding/VGT/) (*Vision Grid Transformer for Document Layout Analysis,* ICCV 2023. [paper](https://arxiv.org/abs/2308.14978)): To **fully leverage multi-modal information and exploit pre-training techniques to learn better representation** for document layout analysis (DLA), we present VGT, a two-stream Vision Grid Transformer, in which Grid Transformer (GiT) is proposed and pre-trained for 2D token-level and segment-level semantic understanding. In addition, a new benchmark for assessing document layout analysis algorithms, called [D^4LA](https://modelscope.cn/datasets/damo/D4LA/summary), is curated and released.
-  - [**VLPT-STD**](./OCR/VLPT-STD/) (*Vision-Language Pre-Training for Boosting Scene Text Detectors,* CVPR 2022. [paper](https://arxiv.org/abs/2204.13867)): We adapt **vision-language joint learning for scene text detection**, a task that intrinsically involves cross-modal interaction between the two modalities: vision and language. The pre-trained model is able to produce more informative representations with richer semantics, which could readily benefit existing scene text detectors (such as EAST and DB) in the down-stream text detection task.
+## Core Ideology
 
-**2023.6 Release**
-  - [**LiteWeightOCR**](./OCR/LiteWeightOCR/) (*Building A Mobile Text Recognizer via Truncated SVD-based Knowledge Distillation-Guided NAS,* BMVC 2023. [paper](https://papers.bmvc2023.org/0375.pdf)): To make OCR models **deployable on mobile devices while keeping high accuracy**, we propose a light-weight text recognizer that integrates Truncated Singular Value Decomposition (TSVD)-based Knowledge Distillation (KD) into the Neural Architecture Search (NAS) process.
+The core design ideas of DocXChain are summarized as follows:
+- **Object:** The central objects of DocXChain are ***documents***, rather than ***LLMs***.
+- **Concision:** The capabilities for document parsing are presented in a "modules + pipelines" fashion, while unnecessary abstraction and encapsulation are abandoned.
+- **Compatibility:** This toolchain can be readily integrated with existing tools, libraries or models (such as LangChain and ChatGPT), to build more powerful systems that can accomplish more complicated and challenging tasks.
 
-**2023.4 Release**
-  - [**GeoLayoutLM**](./DocumentUnderstanding/GeoLayoutLM/) (*GeoLayoutLM: Geometric Pre-training for Visual Information Extraction,* CVPR 2023. [paper](https://arxiv.org/abs/2304.10759)): We propose a multi-modal framework, named GeoLayoutLM, for Visual Information Extraction (VIE). In contrast to previous methods for document pre-training, which usually learn geometric representation in an implicit way, GeoLayoutLM **explicitly models the geometric relations of entities in documents**.
+## Qualitative Examples
 
-**2023.2 Release**
-  - [**LORE-TSR**](./DocumentUnderstanding/LORE-TSR/) (*LORE: Logical Location Regression Network for Table Structure Recognition,* AAAI 2022. [paper](https://arxiv.org/abs/2303.03730)): We model Table Structure Recognition (TSR) as a logical location regression problem and propose a new algorithm called LORE, standing for LOgical location REgression network, which for the first time **combines logical location regression together with spatial location regression** of table cells.
+* Example of General Text Reading:
 
-**2022.9 Release**
-  - [**MGP-STR**](./OCR/MGP-STR/) (*Multi-Granularity Prediction for Scene Text Recognition,* ECCV 2022. [paper](https://arxiv.org/abs/2209.03592)): Based on [ViT](https://arxiv.org/abs/2010.11929) and a tailored Adaptive Addressing and Aggregation module, we explore an implicit way for incorporating linguistic knowledge by introducing subword representations to facilitate **multi-granularity** prediction and fusion in scene text recognition.
-  - [**LevOCR**](./OCR/LevOCR/) (*Levenshtein OCR,* ECCV 2022. [paper](https://arxiv.org/abs/2209.03594)): Inspired by [Levenshtein Transformer](https://arxiv.org/abs/1905.11006), we cast the problem of scene text recognition as an iterative sequence refinement process, which allows for **parallel decoding, dynamic length change and good interpretability**.
+![DocXChain_text_reading_example](./resources/DocXChain_text_reading_example.png)
+
+* Example of Table Parsing:
+
+![DocXChain_table_parsing_example](./resources/DocXChain_table_parsing_example.png)
+
+* Example of Formula Recognition (the image rendered from the LaTeX sequence is produced with the [online system](https://www.latexlive.com/home##) of [LaTeXLive](https://github.com/QianJianTech/LaTeXLive)):
+
+![DocXChain_formula_recognition_example](./resources/DocXChain_formula_recognition_example.png)
+
+* Example of Document Structurization:
+
+![DocXChain_document_structurization_example](./resources/DocXChain_document_structurization_example.png)
+
+## Installation
+
+* Install basic requirements (Python version >= 3.7):
+
+```
+pip install -r requirements.txt
+```
+
+* **[Important]** Install ModelScope as well as related frameworks and libraries (such as PyTorch and TensorFlow). Please refer to the [GitHub homepage of ModelScope](https://github.com/modelscope/modelscope) for more details regarding the installation instructions.
+
+* Install ImageMagick (needed to load PDFs):
+```bash
+apt-get update
+apt-get install libmagickwand-dev
+pip install Wand
+sed -i '/disable ghostscript format types/,+6d' /etc/ImageMagick-6/policy.xml  # run this command if the following message occurs: "wand.exceptions.PolicyError: attempt to perform an operation not allowed by the security policy `PDF'"
+```
+
+* Download the layout analysis model (a homebrewed model provided by us):
+```bash
+wget -c -t 100 -P /home/ https://github.com/AlibabaResearch/AdvancedLiterateMachinery/releases/download/v1.2.0-docX-release/DocXLayout_231012.pth
+``` 
+
+* Download the formula recognition models (from [RapidLatexOCR](https://github.com/RapidAI/RapidLatexOCR)):
+```bash
+wget -c -t 100 -P /home/ https://github.com/AlibabaResearch/AdvancedLiterateMachinery/releases/download/v1.6.0-LaTeX-OCR-models/LaTeX-OCR_image_resizer.onnx
+wget -c -t 100 -P /home/ https://github.com/AlibabaResearch/AdvancedLiterateMachinery/releases/download/v1.6.0-LaTeX-OCR-models/LaTeX-OCR_encoder.onnx
+wget -c -t 100 -P /home/ https://github.com/AlibabaResearch/AdvancedLiterateMachinery/releases/download/v1.6.0-LaTeX-OCR-models/LaTeX-OCR_decoder.onnx
+wget -c -t 100 -P /home/ https://github.com/AlibabaResearch/AdvancedLiterateMachinery/releases/download/v1.6.0-LaTeX-OCR-models/LaTeX-OCR_tokenizer.json
+```
+
+## Inference
+
+One can perform inference using the `example.py` script. It can be run as follows:
+```bash
+python example.py general_text_reading <document_file_path> <output_file_path>  # task: general text reading (dump supports both image and JSON file)
+python example.py table_parsing <document_file_path> <output_file_path>  # task: table parsing  (dump supports both image and JSON file)
+python example.py formula_recognition  <document_file_path> <output_file_path>  # task: formula recognition (dump supports only JSON file)
+python example.py document_structurization <document_file_path> <output_file_path>  # task: document structurization  (dump supports both image and JSON file)
+python example.py whole_pdf_conversion <document_file_path> <output_file_path>  # task: whole PDF conversion, i.e., converting all pages of a PDF file into an organized JSON structure (dump supports only JSON file)
+``` 
+```sh
+python example.py whole_pdf_conversion /papers/Hensley_Wilkins.pdf output/test2.json
+``
+
+## Citation
+
+If you find our work beneficial, please cite:
+
+```
+@article{DocXChain2023,
+  title={{DocXChain: A Powerful Open-Source Toolchain for Document Parsing and Beyond}},
+  author={Cong Yao},
+  journal={ArXiv},
+  year={2023}
+  url={https://arxiv.org/abs/2310.12430}
+}
+```
+
+## *License*
+
+DocXChain is released under the terms of the [Apache License, Version 2.0](LICENSE).
+
+```
+DocXChain is a toolchain for document parsing and the code and models herein created by the authors from Alibaba can only be used for research purpose.
+Copyright (C) 1999-2023 Alibaba Group Holding Ltd. 
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
