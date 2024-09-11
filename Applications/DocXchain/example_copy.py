@@ -13,13 +13,17 @@ import json
 
 import pandas as pd
 
-from modules.file_loading import load_document
+from modules.file_loading import load_document, load_whole_pdf
 from modules.formula_recognition import FormulaRecognition
 from pipelines.general_text_reading import GeneralTextReading
 from pipelines.table_parsing import TableParsing
 
 from pipelines.document_structurization import DocumentStructurization
 from utilities.visualization import *
+
+import os
+from pathlib import Path
+import logging
 
 '''
 def general_text_reading_example(image):
@@ -216,6 +220,77 @@ def whole_pdf_conversion_example(image_list):
     document_structurizer.release()
 
     return final_result
+
+def check_species_processed(root_path, 
+                            processed_list=['Leptonycteris yerbabuenae', 'Leptonycteris nivalis', 'Melipona beecheii']):
+    species_subfolders = os.listdir(root_path)
+    pending_process_species = list(set(species_subfolders)-set(processed_list))
+    return pending_process_species 
+
+def get_list_paths(root_path, 
+               input_subfolder_sufix="_bibliografía", 
+               output_subfolder = "output"
+               ):
+
+    path_dics = []
+    
+    pending_process_species = check_species_processed(root_path)
+
+    for species_folder in pending_process_species:
+        species_folder_path = Path(root_path,species_folder)
+        file_name_list = os.listdir(Path(root_path,species_folder,species_folder+'_bibliografía'))
+        for file_name in file_name_list:
+            path_dics.append(
+                dict(
+                    file_input_path = Path(species_folder_path,str(species_folder_path.name)+input_subfolder_sufix,file_name),
+                    folder_output_path = Path(species_folder_path,output_subfolder),
+                    species_folder = species_folder,
+                    file_name = file_name
+                )
+            )
+    return path_dics
+
+def loop_OCR(root_path): 
+    '''
+    Expected folder Structure :
+
+    root_folder/
+        species A/
+            species A_bibiliografía/
+                file_A1.pdf
+                file_A2.pdf
+            output/
+                Doc_A1
+                Doc_A2
+    
+    Note: The subfolders under root_folde define the species-name. 
+    '''
+    list_paths = get_list_paths(root_path)
+    final_results = []
+
+    for file_path_dict in list_paths[0:2]:#[0:1] is just for testing
+        pdf_path = file_path_dict.get('file_input_path')
+        output_folder = file_path_dict.get('folder_output_path')
+        if not os.path.exists(output_folder):
+            print("Creating output folder in : {output_folder.parent.name}")
+            os.mkdir(output_folder)
+
+        image_list = load_whole_pdf(str(pdf_path))
+
+        try:
+            final_result = whole_pdf_conversion_example(image_list)
+            
+            #final_result = [{**d, "file_path_dict": file_path_dict} for d in final_result]
+        
+        except:
+            final_result = {'error_species':file_path_dict.get('species_folder'), 
+                            'error_file': file_path_dict.get('file_input_path')
+                            }
+            logging.error("Custom_error_msg", exc_info=True)
+        
+        final_results.append(final_result)
+    
+    return final_results
 
 # main routine
 def main():
