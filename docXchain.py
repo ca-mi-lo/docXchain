@@ -43,7 +43,10 @@ def get_list_paths(root_path,
 
     path_dics = []
     
-    pending_process_species = check_species_processed(root_path)
+    try: 
+        pending_process_species = check_species_processed(root_path)
+    except:
+        pending_process_species = os.listdir(root_path)
 
     for species_folder in pending_process_species:
         species_folder_path = Path(root_path,species_folder)
@@ -225,9 +228,9 @@ def write_to_json(dfs:list,list_paths):
                list_of_docs = df_to_doc(res,path_dic)
                if not os.path.exists(output_folder):
                     os.makedirs(output_folder)
-               for page in list_of_docs:
+               for chunk in list_of_docs:
                          with open (output_file_path,"a") as fp:
-                              json.dump(page.dict(),fp)
+                              json.dump(chunk.dict(),fp)
                               #lang_dumps(list_of_docs, fp)
           else:
                with open ('./log_errors',"a") as fp:
@@ -244,7 +247,7 @@ def main():
      Step 2. get_list_paths: From the remaining pending species, get paths of files to process
      Step 3. Invoke the OCR model for the previous list in a loop
      Step 4. Transform data into df and aggregate text into polygons (res_to_df_chunks)
-     Step 5. Router_output:  If the OCR process finished correctly, generate the document in each output folder
+     Step 5. Router_output:  If the OCR process finished correctly, generate the (document + path-metadata) in each output folder
      Pending:
      - Logs & Traces
      - skip on check_file_processed == True
@@ -283,5 +286,6 @@ def main():
 if __name__ == "__main__":
     # execute only if run as a script
     # python docXchain.py /home/camilo/Documents/00-Conabio/by_species
+    # python3 docXchain.py /home/camilo/Documents/by_species
     main()
 
