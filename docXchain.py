@@ -28,7 +28,7 @@ import pandas as pd
 from langchain_core.documents import Document
 
 def check_species_processed(root_path, 
-                            processed_list=['Leptonycteris yerbabuenae', 'Leptonycteris nivalis', 'Melipona beecheii']):
+                            processed_list=['Leptonycteris yerbabuenae_all', 'Leptonycteris nivalis_all', 'Melipona beecheii_all','test species_A','test species_B']):
     species_subfolders = os.listdir(root_path)
     pending_process_species = list(set(species_subfolders)-set(processed_list))
     return pending_process_species 
@@ -217,21 +217,42 @@ def df_to_doc(df_agg, file_path_dict):
 
     return documents
 
-def write_to_json(dfs:list,list_paths):
+def df_to_dict(df_agg, file_path_dict):
+    documents = [ 
+        dict(
+            page_content=row.get("content"),
+            metadata={
+                "page": row.get("page"),
+                "file_name": file_path_dict.get("file_name"),
+                "region_poly": row.get("region_poly"),
+                "input_file": str(file_path_dict.get("file_input_path")),
+                "species_folder": file_path_dict.get("species_folder"),
+                "output_folder": str(Path(file_path_dict.get("folder_output_path"))),
+                "output_file": str(Path(file_path_dict.get("folder_output_path"), file_path_dict.get("file_name").split(".")[0] + ".json"))
+            }
+        )
+        for _, row in df_agg.iterrows()
+    ]
+
+    return documents
+
+def write_to_json(dfs:list,list_paths, mode = 'override'):
      for res, path_dic in  zip(dfs,list_paths):
           output_folder = path_dic.get('folder_output_path')
           output_file_path = Path(output_folder,
                                    path_dic.get('file_name').split(".")[0]+".json")
                
+          if mode == "skip" and os.path.exists(output_file_path):
+                continue  # Skip existing file
+          
           # if it is a DataFrame, result finished correctly
           if isinstance(res, pd.DataFrame):
-               list_of_docs = df_to_doc(res,path_dic)
+               list_of_dicts = df_to_dict(res,path_dic)
                if not os.path.exists(output_folder):
                     os.makedirs(output_folder)
-               for chunk in list_of_docs:
-                         with open (output_file_path,"a") as fp:
-                              json.dump(chunk.dict(),fp)
-                              #lang_dumps(list_of_docs, fp)
+               
+               with open (output_file_path,"w") as fp:
+                    json.dump(list_of_dicts,fp, indent=2)
           else:
                with open ('./log_errors',"a") as fp:
                               try:
@@ -250,9 +271,7 @@ def main():
      Step 5. Router_output:  If the OCR process finished correctly, generate the (document + path-metadata) in each output folder
      Pending:
      - Logs & Traces
-     - skip on check_file_processed == True
-     - Unify output in just one place?
-
+     - Unify output in just one place 
     """
 
     # parse parameters
