@@ -97,6 +97,38 @@ wget -c -t 100 -P /home/ https://github.com/AlibabaResearch/AdvancedLiterateMach
 wget -c -t 100 -P /home/ https://github.com/AlibabaResearch/AdvancedLiterateMachinery/releases/download/v1.6.0-LaTeX-OCR-models/LaTeX-OCR_tokenizer.json
 ```
 
+## Run the code (DocXchain.py)
+
+
+The original examle.py file was modified to accept a single parameter, the 'root_folder' which is expected to contain pdf files (images and text based) to convert them into json files.
+```bash
+python docXchain.py <root_folder>
+```
+
+### What the code does
+    Step 1. check_species_processed: Evaluates at species level if it should be processed
+    Step 2. get_list_paths: From the remaining pending species (See "Expected folder Structure), get paths of files to process
+    Step 3. Invoke the OCR model for the previous list in a loop
+    Step 4. Transform data into df and aggregate text into polygons (res_to_df_chunks)
+    Step 5. Router_output:  If the OCR process finished correctly, generate the (document + path-metadata) in each output folder
+
+
+ 
+###  Expected folder Structure
+
+root_folder/
+    species A/
+        species A_bibiliografía/
+            file_A1.pdf
+            file_A2.pdf
+        output/
+            Doc_A1
+            Doc_A2
+
+Note: The subfolders under root_folde define the species-name. 
+
+
+
 ## Inference
 
 One can perform inference using the `example.py` script. It can be run as follows:
