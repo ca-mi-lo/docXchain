@@ -116,6 +116,8 @@ python docXchain.py <root_folder>
  
 ###  Expected folder Structure
 
+```python
+
 root_folder/
     species A/
         species A_bibiliografía/
@@ -126,8 +128,7 @@ root_folder/
             Doc_A2
 
 Note: The subfolders under root_folde define the species-name. 
-
-
+```
 
 ## Inference
 
