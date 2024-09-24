@@ -127,7 +127,7 @@ root_folder/
             Doc_A1
             Doc_A2
 
-Note: The subfolders under root_folde define the species-name. 
+Note: The subfolders under root_folder defines the species-name.
 ```
 
 ## Inference
