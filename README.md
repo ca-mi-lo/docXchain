@@ -2,6 +2,8 @@
 
 ## Updated notes on installation
 
+Use Python 3.10
+
 - Pinned version of requirements are included in `requirements.txt`. The pinned 
   version were compiled using `pip-tools` on `requirements.in`.
 - Install modelscope with cv: `pip install modelscope[cv] -f https://modelscope.oss-cn-beijing.aliyuncs.com/releases/repo.html`. 
@@ -14,6 +16,17 @@
 - Create missing file:
 ```sh
 touch /home/<USERNAME>/.cache/modelscope/hub/._____temp/damo/cv_resnet18_ocr-detection-line-level_damo/.ipynb_checkpoints/configuration-checkpoint.json
+```
+- Download the layout analysis model
+```bash
+wget -c -t 100 -P /home/ https://github.com/AlibabaResearch/AdvancedLiterateMachinery/releases/download/v1.2.0-docX-release/DocXLayout_231012.pth
+``` 
+- Download the formula recognition models (from [RapidLatexOCR](https://github.com/RapidAI/RapidLatexOCR)):
+```bash
+wget -c -t 100 -P /home/ https://github.com/AlibabaResearch/AdvancedLiterateMachinery/releases/download/v1.6.0-LaTeX-OCR-models/LaTeX-OCR_image_resizer.onnx
+wget -c -t 100 -P /home/ https://github.com/AlibabaResearch/AdvancedLiterateMachinery/releases/download/v1.6.0-LaTeX-OCR-models/LaTeX-OCR_encoder.onnx
+wget -c -t 100 -P /home/ https://github.com/AlibabaResearch/AdvancedLiterateMachinery/releases/download/v1.6.0-LaTeX-OCR-models/LaTeX-OCR_decoder.onnx
+wget -c -t 100 -P /home/ https://github.com/AlibabaResearch/AdvancedLiterateMachinery/releases/download/v1.6.0-LaTeX-OCR-models/LaTeX-OCR_tokenizer.json
 ```
 
 ## Docker image

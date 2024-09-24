@@ -1,6 +1,12 @@
+wheel
+setuptools
+pip
 opencv-python
 pdfplumber
 rapid_latex_ocr
 # extras
 ipdb
 tokenizers<0.20
+decorator<5.0
+langchain-core
+
