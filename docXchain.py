@@ -28,9 +28,10 @@ import pandas as pd
 from langchain_core.documents import Document
 
 def check_species_processed(root_path, 
-                            processed_list=['Leptonycteris yerbabuenae_all', 'Leptonycteris nivalis_all', 'Melipona beecheii_all','test species_A','test species_B']):
+                            processed_list=['Leptonycteris yerbabuenae', 'Leptonycteris nivalis', 'Melipona beecheii','test species_A','test species_B']):
     species_subfolders = os.listdir(root_path)
     pending_process_species = list(set(species_subfolders)-set(processed_list))
+    print(pending_process_species)
     return pending_process_species 
 
 def check_file_processed(file_path):
