@@ -27,44 +27,20 @@ docker build -t docx:1 -f docker/Dockerfile .
 
 <font color=#FFA500 size=3> ***"Make Every Unstructured Document Literally Accessible to Machines"*** </font>
 
-Documents are ubiquitous, since they are excellent carriers for recording and spreading information across space and time. Documents have been playing a critically important role in the daily work, study and life of people all over the world. Every day, billions of documents in different forms are created, viewed, processed, transmited and stored around the world, either physically or digitally. However, not all documents in the digital world can be directly accessed by machines (including computers and other automatic equipments), as only a portion of the documents can be successfully parsed with low-level procedures. For instance, the [Adobe Extract APIs](https://developer.adobe.com/document-services/docs/overview/pdf-extract-api/) are able to directly convert the metadata of born-digital PDF files into HTML-like trees, but would completely fail when handling PDFs generated from photographs produced by scanners or images captured by cameras. Therefore, if one would like to make documents that are not born-digital conveniently and instantly accessible to machines, a powerful toolset for extracting the structures and contents from such unstructured documents is of the essence.
+Extracting text from a PDF file can be challenging, especially when dealing with scanned documents or images. OCR (Optical Character Recognition) technology is designed to overcome these challenges. It can convert images into text, recognizing individual characters and assembling them into words.
 
-DocXChain is a powerful open-source toolchain for document parsing, which can convert the rich information in ***unstructured documents***, such as text, tables and charts, into ***structured representations*** that are readable and manipulable by machines. Currently, basic capabilities, including text detection, text recognition, table structure recognition, mathematical formula recognition and layout analysis, are provided. In addition, upon these basic capabilities, we also build typical pipelines, i.e., text reading, table parsing, document structurization and whole PDF conversion, to drive more complicated applications related to documents in real-world scenarios.
+One of the key challenges in OCR is accurately identifying paragraph breaks. While this might seem straightforward for plain text, it becomes more complex in formatted documents and specific editorial desing context. A line break could indicate the end of a title, subtitle, footer, column break, or even a text bubble. OCR tools are adept at handling these complexities, allowing them to accurately identify and extract meaningful text units.
 
-DocXChain is designed and developed with the original aspiration of ***promoting the level of digitization and structurization for documents***. In the future, we will go beyond pure document parsing capabilities, to explore more possibilities, e.g., combining DocXChain with large language models (LLMs) to perform document information extraction (IE), question answering (QA) and retrieval-augmented generation (RAG).
+Another advantage of OCR is its ability to classify different types of text. This means it can distinguish between titles, footers, and main content. By filtering out irrelevant text, OCR helps ensure that only the most pertinent information is processed.
 
-For more details, please refer to the [technical report](https://arxiv.org/abs/2310.12430) of DocXChain. 
+Our current but not single use case for OCR-extracted text is feeding it into an LLM (Large Language Model) API. By accurately identifying sentence boundaries, OCR can improve the performance of the LLM, as it helps the model to better understand the context and meaning of the text.
 
-**Notice 1:** In this project, we adopt the ***broad concept of documents***, meaning DocXChain can support various kinds of documents, including regular documents (such as books, academic papers and business forms), street view photos, presentations and even screenshots.
 
-**Notice 2:** You are welcome to experience our online PoC system [DocMaster](https://www.modelscope.cn/studios/damo/DocMaster/summary), which combines basic document parsing capabilities with LLMs to realize precise document information extraction and question answering.
+## Repositorio Original
 
-**Notice 3:** We also provide commercial products (online APIs) for document parsing on Alibaba Could. Please visit the [homepage of DocMind](https://docmind.console.aliyun.com/doc-overview), if you are interested.
+Este repositorio es una adaptación de este otro: [DocXchain](https://github.com/AlibabaResearch/AdvancedLiterateMachinery).
+El alcance el repocitorio original es más aplio, ya que puede enfocarse en determinadoas partes del documentos o enfocarse en detectar fórmulas y tablas para traducirlas a código latex, por ejemplo, así como procesar imágenes, mientras que nostros suponemos que se tratan siempre de achivos en formato pdf.
 
-## Core Ideology
-
-The core design ideas of DocXChain are summarized as follows:
-- **Object:** The central objects of DocXChain are ***documents***, rather than ***LLMs***.
-- **Concision:** The capabilities for document parsing are presented in a "modules + pipelines" fashion, while unnecessary abstraction and encapsulation are abandoned.
-- **Compatibility:** This toolchain can be readily integrated with existing tools, libraries or models (such as LangChain and ChatGPT), to build more powerful systems that can accomplish more complicated and challenging tasks.
-
-## Qualitative Examples
-
-* Example of General Text Reading:
-
-![DocXChain_text_reading_example](./resources/DocXChain_text_reading_example.png)
-
-* Example of Table Parsing:
-
-![DocXChain_table_parsing_example](./resources/DocXChain_table_parsing_example.png)
-
-* Example of Formula Recognition (the image rendered from the LaTeX sequence is produced with the [online system](https://www.latexlive.com/home##) of [LaTeXLive](https://github.com/QianJianTech/LaTeXLive)):
-
-![DocXChain_formula_recognition_example](./resources/DocXChain_formula_recognition_example.png)
-
-* Example of Document Structurization:
-
-![DocXChain_document_structurization_example](./resources/DocXChain_document_structurization_example.png)
 
 ## Installation
 
