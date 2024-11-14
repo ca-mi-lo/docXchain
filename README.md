@@ -93,9 +93,9 @@ Here an example of an element of the the json file. Each element has the main in
 #### Glossary
 
 *page_content* (string): The extracted text content of the current page within the processed document.  
-***metadata***:
-    *page* (integer): The zero-based page number within the input document that this entry corresponds to (starting from 0).  
-    *file_name* (string): The original filename of the input document from which this data was extracted.  
+*metadata*:
+\t**page** (integer): The zero-based page number within the input document that this entry corresponds to (starting from 0).  
+\t**file_name** (string): The original filename of the input document from which this data was extracted.  
     *region_poly* (list of integers): A list of eight integers representing a polygon that defines the bounding box around the extracted text content on the page. Used as aggregation granularity for the page_content.  
     *input_file* (string): The full path to the original input document that was processed.  
     *species_folder* (string): The folder name within the output directory that corresponds to the species the document is related to (e.g., "Melipona beecheii").  
