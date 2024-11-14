@@ -143,7 +143,7 @@ def loop_OCR(root_path, max_files = 100):
         try:
             final_result = whole_pdf_conversion_example(image_list)
             
-            
+  
         
         except:
             final_result = {'error_species':str(file_path_dict.get('species_folder')), 
@@ -287,9 +287,6 @@ def main():
     print ("Started!")
     print ('Whole PDF conversion task, only PDF files are supported!')
 
-    # Load whole pdf, no options (for now)
-    # image_list & final result are processed together
-
     final_results = loop_OCR(args.root_path, max_files = 100)
 
     dfs = [res_to_df_chunks(df) for df in final_results]
@@ -304,8 +301,5 @@ def main():
     return
 
 if __name__ == "__main__":
-    # execute only if run as a script
-    # python docXchain.py /home/camilo/Documents/00-Conabio/by_species
-    # python3 docXchain.py /home/camilo/Documents/by_species
     main()
 
