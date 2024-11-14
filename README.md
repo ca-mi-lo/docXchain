@@ -24,7 +24,7 @@ Our current but not single use-case for OCR-extracted text is feeding it into an
 - Install modelscope with cv: `pip install modelscope[cv] -f https://modelscope.oss-cn-beijing.aliyuncs.com/releases/repo.html`. 
 
 
-- * Create missing file (if necesary only):
+- Create missing file (if necesary only):
 ```sh
 touch /home/<USERNAME>/.cache/modelscope/hub/._____temp/damo/cv_resnet18_ocr-detection-line-level_damo/.ipynb_checkpoints/configuration-checkpoint.json
 ```
@@ -52,8 +52,9 @@ wget -c -t 100 -P /home/ https://github.com/AlibabaResearch/AdvancedLiterateMach
 
 ## How to use it
 
-The program takes a unique parameter, a root-path, to search for pdf's in it. In the first level below the root folder, there are more folders expected.Theses other folders, "species-folders", are very important, since their name will impact the data structure. 
-The species folders contain "_bibliografía" subfolders. The actual PDF files should be stored in these subfolders before execution.  See "Expected folder Structure" for a diagram.
+The program takes a unique parameter, a root path, to search for PDFs within it. At the first level below the root folder, there are expected to be more folders. These other folders, "species folders," are crucial as their names will influence the data structure.  
+
+The species folders contain "_bibliografía" subfolders. The actual PDF files should be stored in these subfolders before execution. Please refer to the "Expected Folder Structure" diagram for a visual representation.
 
 ###  Expected folder Structure
 
@@ -111,11 +112,11 @@ python docXchain.py <root_folder>
 ```
 
 ### What the code does
-    Step 1. check_species_processed: Evaluates at species level if it should be processed
-    Step 2. get_list_paths: From the remaining pending species (See "Expected folder Structure), get paths of files to process
-    Step 3. Invoke the OCR model for the previous list in a loop
-    Step 4. Transform data into df and aggregate text into polygons
-    Step 5. Router_output:  If the OCR process finished correctly, generate the (document + path-metadata) in each output folder
+    Step 1. check_species_processed: Evaluates whether a species should be processed at the species level.
+    Step 2. get_list_paths: Retrieves paths of files to process from the remaining pending species  (See "Expected folder Structure)
+    Step 3. Iteratively invokes the OCR model for the previously obtained list of files.
+    Step 4. Transforms the data into a DataFrames and aggregates text based on polygon ids.
+    Step 5. Output Routing: If the OCR process completes successfully, generates the (document + path metadata) in each output folder.
 
 
 ### Defaults
@@ -131,8 +132,8 @@ DocXChain is released under the terms of the [Apache License, Version 2.0](LICEN
 
 ### Original Repository
 
-This repository is an apdaptation of [DocXchain](https://github.com/AlibabaResearch/AdvancedLiterateMachinery).
-The original repository has a wider scope, allowing for more specific tasks like focusing on particular document sections or converting formulas and tables to LaTeX. It can also handle images, while our version is specifically designed for PDF files.
+This repository is an adaptation of [DocXchain](https://github.com/AlibabaResearch/AdvancedLiterateMachinery).
+The original repository has a broader scope, allowing for more specific tasks such as focusing on particular document sections or converting formulas and tables to LaTeX. It can also handle images, while our version is designed specifically for PDF files.
 
 ```
 @article{DocXChain2023,
