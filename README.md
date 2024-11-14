@@ -4,7 +4,7 @@
 
 Extracting text from a PDF file can be challenging, especially when dealing with scanned documents or images. OCR (Optical Character Recognition) technology is designed to overcome these challenges. It can convert images into text, recognizing individual characters and assembling them into words.
 
-One of the key challenges in OCR is accurately identifying paragraph breaks. While this might seem straightforward for plain text, it becomes more complex in formatted documents and specific editorial design context. A line break could indicate the end of a title, subtitle, footer, column break, or even a text bubble. OCR tools are adept at handling these complexities, allowing them to accurately identify and extract meaningful text units.
+One of the key challenges in text processing is accurately identifying paragraph breaks. While this might seem straightforwar at plain sight, it becomes more complex in formatted documents and specific editorial design context. A line break could indicate the end of a title, subtitle, footer, column break, or even a text bubble. OCR tools are adept at handling these complexities, allowing them to accurately identify and extract meaningful text units.
 
 Another advantage of OCR is its ability to classify different types of text. This means it can distinguish between titles, footers, and main content. By filtering out irrelevant text, OCR helps ensure that only the most pertinent information is processed.
 
@@ -52,7 +52,8 @@ wget -c -t 100 -P /home/ https://github.com/AlibabaResearch/AdvancedLiterateMach
 
 ## How to use it
 
-The program takes a unique parameter, a root-path, to search for pdf's in it. In the first level below the root folder, there are more folders expected.Theses other folders, "species-folders", are very important, since their name will impact the data structure. See "Expected folder Structure" for a diagram.
+The program takes a unique parameter, a root-path, to search for pdf's in it. In the first level below the root folder, there are more folders expected.Theses other folders, "species-folders", are very important, since their name will impact the data structure. 
+The species folders contain "_bibliografía" subfolders. The actual PDF files should be stored in these subfolders before execution.  See "Expected folder Structure" for a diagram.
 
 ###  Expected folder Structure
 
@@ -91,15 +92,15 @@ Here an example of an element of the the json file. Each element has the main in
 ```
 #### Glossary
 
-*page_content* (string): The extracted text content of the current page within the processed document.
+*page_content* (string): The extracted text content of the current page within the processed document.  
 ***metadata***:
-    *page* (integer): The zero-based page number within the input document that this entry corresponds to (starting from 0).
-    *file_name* (string): The original filename of the input document from which this data was extracted.
-    *region_poly* (list of integers): A list of eight integers representing a polygon that defines the bounding box around the extracted text content on the page. Used as aggregation granularity for the page_content.
-    *input_file* (string): The full path to the original input document that was processed.
-    *species_folder* (string): The folder name within the output directory that corresponds to the species the document is related to (e.g., "Melipona beecheii").
-    *output_folder* (string): The full path to the output directory where the processed data is stored.
-    *output_file* (string): The full path to the current JSON output file itself. This provides a reference point within the overall output structure.
+    *page* (integer): The zero-based page number within the input document that this entry corresponds to (starting from 0).  
+    *file_name* (string): The original filename of the input document from which this data was extracted.  
+    *region_poly* (list of integers): A list of eight integers representing a polygon that defines the bounding box around the extracted text content on the page. Used as aggregation granularity for the page_content.  
+    *input_file* (string): The full path to the original input document that was processed.  
+    *species_folder* (string): The folder name within the output directory that corresponds to the species the document is related to (e.g., "Melipona beecheii").  
+    *output_folder* (string): The full path to the output directory where the processed data is stored.  
+    *output_file* (string): The full path to the current JSON output file itself. This provides a reference point within the overall output structure.  
 
 
 ## Run the code (DocXchain.py)
